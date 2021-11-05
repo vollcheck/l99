@@ -54,18 +54,8 @@
 
 
 ;; Problem 08.
-(defun last-element (xs)
-  "Get last element from list as an element, not as list"
-  (if (not (null xs))
-      (if (listp xs)
-	  (first (last xs))
-	  xs)))
-
 (defun compress (xs)
-  (if (not (null xs))
-      (cons
-       (first xs) ;; todo
-       (rest xs))))
-
-;; Example:
-;; (compress '(a a a a b c c a a d e e e e)) => (A B C A D E)
+  (if (and (first xs) (second xs))
+      (if (eq (first xs) (second xs)) ; could count, how many elements are the same
+	  (compress (rest xs))
+	  (cons (first xs) (compress (rest xs))))))

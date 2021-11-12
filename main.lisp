@@ -1,6 +1,5 @@
 ;; Look up documentation for the symbol at
-;; point in the Common Lisp Hyperspec
-;; C-c C-d h
+;; point in the Common Lisp Hyperspec `C-c C-d h`
 
 ;; Problem 01.
 (defun my-last (xs)
@@ -10,7 +9,7 @@
 
 
 ;; Problem 02.
-(defun my-but-last (xs)
+(defun my-butlast (xs)
   (if (= (length xs) 2)
       (list (first xs) (second xs))
       (my-but-last (rest xs))))
@@ -31,13 +30,10 @@
 
 
 ;; Problem 05.
-(defun my-reverse (xs)
-  (reverse-aux xs ()))
-
-(defun reverse-aux (xs rst)
+(defun my-reverse (xs &optional (acc ())) ; accumulator design
   (if (null xs)
-      rst
-      (reverse-aux (rest xs) (cons (first xs) rst))))
+      acc
+      (my-reverse (rest xs) (cons acc (first xs)))))
 
 
 ;; Problem 06.
@@ -55,7 +51,19 @@
 
 ;; Problem 08.
 (defun compress (xs)
-  (if (and (first xs) (second xs))
-      (if (eq (first xs) (second xs)) ; could count, how many elements are the same
-	  (compress (rest xs))
-	  (cons (first xs) (compress (rest xs))))))
+  (let ((f (first xs)) (s (second xs)))
+    (if (and f s)
+	(if (eq f s) ; could count, how many elements are the same
+	    (compress (rest xs))
+	    (cons f (compress (rest xs)))))))
+
+
+;; Problem 09.
+(defun pack (xs &optional (acc ()))
+  (if (not xs)
+      acc
+      (pack
+       (rest xs)
+       (if (eq (first xs) (first (first (last acc))))
+	   (append (butlast acc) (list (append (first (last acc)) (list (first xs)))))
+	   (append acc (list (list (first xs))))))))

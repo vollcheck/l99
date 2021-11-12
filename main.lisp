@@ -106,3 +106,13 @@
   (if (not xs)
       acc
       (dupli (rest xs) (append acc (list (first xs) (first xs))))))
+
+
+
+;; Problem 15.
+(defun repli (xs n &optional (acc ()))
+  (if (not xs)
+      acc
+      (repli
+       (rest xs)
+       (append acc (make-list n :initial-element (first xs))))))

@@ -80,3 +80,21 @@
 	 (if (eq (first xs) symbol)
 	     (append (butlast acc) (list (list (1+ counter) symbol)))
 	     (append acc (list (list 1 (first xs)))))))))
+
+
+;; Problem 11.
+(defun encode-modified (xs &optional (acc ()))
+  (if (not xs)
+      acc
+      (encode-modified
+       (rest xs)
+       (let ((last-elem (first (last acc))))
+	 (if (listp last-elem)
+	     (let ((counter (first last-elem))
+		   (symbol (second last-elem)))
+	       (if (eq (first xs) symbol)
+		   (append (butlast acc) (list (list (1+ counter) symbol)))
+		   (append acc (list (first xs)))))
+	     (if (eq (first xs) last-elem)
+		 (append (butlast acc) (list (list 2 (first xs))))
+		 (append acc (list (first xs)))))))))

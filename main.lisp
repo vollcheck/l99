@@ -98,3 +98,11 @@
 	     (if (eq (first xs) last-elem)
 		 (append (butlast acc) (list (list 2 (first xs))))
 		 (append acc (list (first xs)))))))))
+
+
+
+;; Problem 14.
+(defun dupli (xs &optional (acc ()))
+  (if (not xs)
+      acc
+      (dupli (rest xs) (append acc (list (first xs) (first xs))))))

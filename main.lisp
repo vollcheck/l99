@@ -67,3 +67,16 @@
        (if (eq (first xs) (first (first (last acc))))
 	   (append (butlast acc) (list (append (first (last acc)) (list (first xs)))))
 	   (append acc (list (list (first xs))))))))
+
+
+;; Problem 10.
+(defun encode (xs &optional (acc ()))
+  (if (not xs)
+      acc
+      (encode
+       (rest xs)
+       (let ((counter (first (first (last acc))))
+	     (symbol (second (first (last acc)))))
+	 (if (eq (first xs) symbol)
+	     (append (butlast acc) (list (list (1+ counter) symbol)))
+	     (append acc (list (list 1 (first xs)))))))))

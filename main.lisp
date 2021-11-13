@@ -129,3 +129,12 @@
       (if (eq (1- nn) 0)
 	  (drop (rest xs) n acc n)
 	  (drop (rest xs) n (append acc (list (first xs))) (1- nn)))))
+
+
+;; Problem 17.
+(defun split (xs n &optional (acc ()))
+  (if (not xs)
+      acc
+      (if (eq n 0)
+	  (list acc xs)
+	  (split (rest xs) (1- n) (append acc (list (first xs)))))))

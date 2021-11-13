@@ -101,7 +101,18 @@
 
 
 ;; Problem 12.
-; todo
+(defun decode (xs &optional (acc ()))
+  (if (not xs)
+      acc
+      (decode
+       (rest xs)
+       (append acc
+	       (if (listp (first xs))
+		   (let ((counter (first (first xs)))  ; apply destructuring someday
+			 (symbol (second (first xs))))
+		     (make-list counter :initial-element symbol))
+		   (list (first xs)))))))
+
 ;; Problem 13.
 ; todo
 

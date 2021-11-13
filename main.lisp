@@ -100,13 +100,16 @@
 		 (append acc (list (first xs)))))))))
 
 
+;; Problem 12.
+; todo
+;; Problem 13.
+; todo
 
 ;; Problem 14.
 (defun dupli (xs &optional (acc ()))
   (if (not xs)
       acc
       (dupli (rest xs) (append acc (list (first xs) (first xs))))))
-
 
 
 ;; Problem 15.
@@ -116,3 +119,13 @@
       (repli
        (rest xs)
        (append acc (make-list n :initial-element (first xs))))))
+
+
+
+;; Problem 16.
+(defun drop (xs n &optional (acc ()) (nn n))
+  (if (not xs)
+      acc
+      (if (eq (1- nn) 0)
+	  (drop (rest xs) n acc n)
+	  (drop (rest xs) n (append acc (list (first xs))) (1- nn)))))

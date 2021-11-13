@@ -138,3 +138,14 @@
       (if (eq n 0)
 	  (list acc xs)
 	  (split (rest xs) (1- n) (append acc (list (first xs)))))))
+
+
+;; Probiem 18.
+(defun slice (xs start end &optional (acc ()) (counter 1))
+  ;; should assert that start is lower than end
+  (cond
+    ((< counter start)
+     (slice (rest xs) start end acc (1+ counter)))
+    ((and (>= counter start) (<= counter end))
+     (slice (rest xs) start end (append acc (list (first xs))) (1+ counter)))
+    (t acc)))

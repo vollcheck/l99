@@ -181,13 +181,18 @@
       (append acc (list symbol) xs)))
 
 
+;; Well, after all of that, I can see that most of my solutions
+;; has been implemented using accumulator
+;; so it might be a chance to implement macro for extended
+;; `defun` definition
+;; Could closure might be helpful?
+
 ;; Problem 22.
-(defun bi-between (start end n)
-  (or
-   (and (>= n start) (<= n end))
-   (and (<= n start) (>= n end))))
-
-
-
 (defun range (start end &optional (acc ()) (counter start))
-  ())
+  (if (<= start end)
+      (if (<= counter end)
+	  (range start end (append acc (list counter)) (1+ counter))
+	  acc)
+      (if (>= counter end)
+	  (range start end (append acc (list counter)) (1- counter))
+	  acc)))

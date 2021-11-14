@@ -188,7 +188,7 @@
 ;; Could closure might be helpful?
 
 ;; Problem 22.
-(defun range (start end &optional (acc ()) (counter start))
+(defun range (start end &optional (acc ()) (counter start)) ; it deserves refactor
   (if (<= start end)
       (if (<= counter end)
 	  (range start end (append acc (list counter)) (1+ counter))
@@ -196,3 +196,14 @@
       (if (>= counter end)
 	  (range start end (append acc (list counter)) (1- counter))
 	  acc)))
+
+
+;; Problem 23.
+(defun rnd-select (xs n &optional (acc ()))
+  (if (eq n 0)
+      acc
+      (let ((r (random (length xs))))
+	(rnd-select
+	 (remove-at xs r)
+	 (1- n)
+	 (append acc (list (nth r xs)))))))

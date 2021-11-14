@@ -172,3 +172,22 @@
       (if (< counter n)
 	  (remove-at (rest xs) n (append acc (list (first xs))) (1+ counter))
 	  (append acc (rest xs)))))
+
+
+;; Problem 21.
+(defun insert-at (symbol xs n &optional (acc ()) (counter 1))
+  (if (< counter n)
+      (insert-at symbol (rest xs) n (append acc (list (first xs))) (1+ counter))
+      (append acc (list symbol) xs)))
+
+
+;; Problem 22.
+(defun bi-between (start end n)
+  (or
+   (and (>= n start) (<= n end))
+   (and (<= n start) (>= n end))))
+
+
+
+(defun range (start end &optional (acc ()) (counter start))
+  ())

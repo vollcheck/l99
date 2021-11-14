@@ -204,6 +204,16 @@
       acc
       (let ((r (random (length xs))))
 	(rnd-select
-	 (remove-at xs r)
+	 (remove-at xs (1+ r))
 	 (1- n)
 	 (append acc (list (nth r xs)))))))
+
+
+;; Problem 24.
+(defun lotto-select (n limit)
+  (rnd-select (range 0 limit) n))
+
+
+;; Problem 25.
+(defun rnd-permu (xs)
+  (rnd-select xs (length xs)))

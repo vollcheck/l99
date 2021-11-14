@@ -160,3 +160,15 @@
     ((and (>= counter start) (<= counter end))
      (slice (rest xs) start end (append acc (list (first xs))) (1+ counter)))
     (t acc)))
+
+
+;; Problem 19.
+;; todo
+
+;; Problem 20.
+(defun remove-at (xs n &optional (acc ()) (counter 1))
+  (if (not xs)
+      acc
+      (if (< counter n)
+	  (remove-at (rest xs) n (append acc (list (first xs))) (1+ counter))
+	  (append acc (rest xs)))))

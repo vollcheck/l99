@@ -163,7 +163,11 @@
 
 
 ;; Problem 19.
-;; todo
+(defun rotate (xs n)
+  (cond
+    ((> n 0) (rotate (append (rest xs) (list (first xs))) (1- n)))
+    ((< n 0) (rotate (append (last xs) (butlast xs)) (1+ n)))
+    (t xs)))
 
 ;; Problem 20.
 (defun remove-at (xs n &optional (acc ()) (counter 1))
